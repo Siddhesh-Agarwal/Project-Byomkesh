@@ -1,0 +1,6 @@
+.streamlit
+core
+app.py
+poetry.lock
+pyproject.toml
+requirements.txt
