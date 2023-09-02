@@ -1,8 +1,4 @@
-# Byomkesh
-
-![Byomkesh](./static/Byomkesh.jpeg)
-
----
+<img src="https://github.com/Siddhesh-Agarwal/TNPoliceHackathon/blob/c7570fbb0daa7e1abf4fc71737c7b71944f7582a/static/Byomkesh.jpeg" alt="Logo" width="100%" />
 
 ## Execution
 
