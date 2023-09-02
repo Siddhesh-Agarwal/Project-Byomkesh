@@ -1,8 +1,8 @@
-import requests
-import tweepy
+import tweepy  # type: ignore
+from typing import Any
 
 
-def find_tweet(search_tweet: str, until: str):
+def find_tweet(search_tweet: str, until: str) -> list[Any]:
     """
     find_tweet
 
@@ -29,13 +29,13 @@ def find_tweet(search_tweet: str, until: str):
     auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
 
     # Create the authentication object
-    auth.set_access_token(accessToken, accessTokenSecret)
+    auth.set_access_token(accessToken, accessTokenSecret)  # type: ignore
 
     # Create the API object while passing in auth information
     api = tweepy.API(auth)
 
     # Create a tweet
-    tweets = api.search_tweets(
+    tweets = api.search_tweets(  # type: ignore
         q=search_tweet,
         result_type="recent",
         until=until,
@@ -43,10 +43,9 @@ def find_tweet(search_tweet: str, until: str):
 
     # return tweets
     arr = []
-    for tweet in tweets:
-        arr.append(tweet._json)
-
+    for tweet in tweets:  # type: ignore
+        arr.append(tweet._json)  # type: ignore
     # sort array
-    arr.sort(reverse=True, key=lambda x: x["created_at"])
+    arr.sort(reverse=True, key=lambda x: x["created_at"])  # type: ignore
 
-    return arr
+    return arr  # type: ignore

@@ -1,3 +1,4 @@
+from typing import Any
 import tweepy
 from pandas import Series
 from textblob import TextBlob
@@ -37,7 +38,7 @@ def classify(text: str, patience: float = 0.15) -> int:
     return 0
 
 
-def analyze_user(username: str, count: int = 100) -> list:
+def analyze_user(username: str, count: int = 100) -> list[Any]:
     """
     analyzes the tweets of the user
 

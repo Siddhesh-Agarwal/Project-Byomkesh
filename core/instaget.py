@@ -1,13 +1,16 @@
 from json import decoder, dumps
+from typing import Any
 from urllib.parse import quote_plus
 
 import requests
 
 
-def getUserId(username, sessionsId):
-    cookies = {"sessionid": sessionsId}
-    headers = {"User-Agent": "Instagram 64.0.0.14.96"}
-    api = requests.get(
+def getUserId(
+    username: str, sessionsId: str
+) -> dict[str, str | None] | dict[str, Any | None]:
+    cookies: dict[str, str] = {"sessionid": sessionsId}
+    headers: dict[str, str] = {"User-Agent": "Instagram 64.0.0.14.96"}
+    api: requests.Response = requests.get(
         f"https://www.instagram.com/{username}/?__a=1&__d=dis",
         headers=headers,
         cookies=cookies,
@@ -23,7 +26,9 @@ def getUserId(username, sessionsId):
         return {"id": None, "error": "Rate limit"}
 
 
-def getInfo(username, sessionId):
+def getInfo(
+    username: str, sessionId: str
+) -> dict[str, str | None] | dict[str, Any | None]:
     userId = getUserId(username, sessionId)
     if userId["error"]:
         return userId
@@ -40,14 +45,14 @@ def getInfo(username, sessionId):
     return {"user": infoUser, "error": None}
 
 
-def advanced_lookup(username):
+def advanced_lookup(username: str) -> dict[str, Any | None] | dict[str, str | None]:
     """
     Post to get obfuscated login infos
     """
-    data = "signed_body=SIGNATURE." + quote_plus(
+    data: str = "signed_body=SIGNATURE." + quote_plus(
         dumps({"q": username, "skip_recovery": "1"}, separators=(",", ":"))
     )
-    api = requests.post(
+    api: requests.Response = requests.post(
         "https://i.instagram.com/api/v1/users/lookup/",
         headers={
             "Accept-Language": "en-US",
